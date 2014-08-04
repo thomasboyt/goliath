@@ -2,8 +2,6 @@ function maskFlags(flags) {
   return flags & parseInt('0000000000001111', 2);
 }
 
-var sprites = [];
-
 function readChunk(data, offset) {
   var sprite = {};
 
@@ -33,7 +31,10 @@ function hexDict(o) {
 }
 
 module.exports = function(data) {
+  var sprites = [];
+
   for (var i = 0; i < data.length; i+= 16) {
     sprites.push(readChunk(data, i));
   }
+  return sprites;
 };
