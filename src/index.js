@@ -3,9 +3,12 @@
 var fs = require('fs');
 var dataBuf = fs.readFileSync('./data/csg1i.dat');
 var spriteBuf = fs.readFileSync('./data/CSG1.dat');
+
 var _ = require('lodash');
+var canvas = require('canvas');
 
 var readSpriteData = require('./readSpriteData');
+
 
 function loadDirect(sprite) {
   var pixels = [];
@@ -102,24 +105,34 @@ function loadPalette(sprite) {
   return palette;
 }
 
+function applyPalette(pixelMap, palette) {
+  return pixelMap.map(function(col) {
+    return col.map(function(pixel) {
+      if ( pixel === null ) { return null; }
+      return palette.colors[pixel];
+    });
+  });
+}
+
+
 var sprites = readSpriteData(dataBuf);
-
-var direct = sprites.filter(function(sprite) { return sprite.flags === 1; });
-var compact = sprites.filter(function(sprite) { return sprite.flags === 5; });
-var palettes = sprites.filter(function(sprite) { return sprite.flags === 8; });
-
-// console.log(palettes.length);
-//
-// var p = loadPalette(palettes[0]);
-// console.log(p);
+var palettes = sprites.filter(function(sprite) {
+  return sprite.flags === 8;
+}).map(loadPalette);
 
 
-sd = sprites[5187];
-loadCompacted(sd);
 
-// var sd = sprites.filter(function(sprite) {
-//   return sprite.flags === 1;
-// })[229];
-//
-// var p = loadDirect(sd);
+module.exports = {
+  loadSprite: function(spriteIndex) {
+    spriteIndex = parseInt(spriteIndex, 10);
+    var sprite = sprites[spriteIndex];
 
+    if (sprite.flags === 1) {
+      sprite = loadDirect(sprite);
+    } else if (sprite.flags === 5) {
+      sprite = loadCompacted(sprite);
+    }
+
+    return applyPalette(sprite, palettes[0]);
+  }
+};
