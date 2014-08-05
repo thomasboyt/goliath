@@ -46,6 +46,8 @@ SpriteLoader.prototype._loadPalette = function(sprite) {
 };
 
 SpriteLoader.prototype._loadDirect = function(sprite) {
+  throw new Error('Direct loading is broken right now :I');
+
   var pixels = [];
 
   var start = sprite.startAddress;
