@@ -1,0 +1,34 @@
+<html>
+  <head>
+  </head>
+
+  <body>
+    <img src="{{dataURL}}" /><br/>
+
+    <a href="/sprites/{{last}}?palette_id={{selectedPalette}}">Last</a> - {{id}} - <a href="/sprites/{{next}}?palette_id={{selectedPalette}}">Next</a><br/>
+
+    <select name="palette" id="palette-picker">
+       {% for i in range(0, 20) %}
+          <option {% if i == selectedPalette %}selected{% endif %} value="{{i}}">Palette {{i}}</option>
+       {% endfor %}
+    </select>
+
+    <br/><br/>
+
+    <table>
+      <tr>
+        <td>Index</td>
+        <td>{{id}}</td>
+      <tr>
+        <td>Address</td>
+        <td>{{meta.decAddress}} / 0x{{meta.hexAddress}}</td>
+      </tr>
+    </table>
+
+    <script>
+      document.getElementById('palette-picker').onchange = function(e) {
+        document.location = '/sprites/{{id}}?palette_id=' + e.target.value;
+      };
+    </script>
+  </body>
+</html>
