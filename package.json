@@ -1,4 +1,7 @@
 {
   "name": "nw-demo",
-  "main": "index.html"
+  "main": "index.html",
+  "dependencies": {
+    "lodash": "~2.4.1"
+  }
 }
