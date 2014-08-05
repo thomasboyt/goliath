@@ -11,6 +11,11 @@ RCT has like 20 palettes, so to try different ones, add `?palette_id=n` to the e
 
 In general, I don't think I've set up palettes correctly! There's like a weird offset thing I'm not even using yet. More investigation is needed.
 
+### Points of interest
+
+* Around 3000: steel coaster car!
+* *...*
+
 ### Resources
 
 * [Regarding Graphics](https://web.archive.org/web/20131221171502/http://www.strategyplanet.com/rctuk/tid/csg/csg1dat.html)
