@@ -22,9 +22,8 @@ function loadDirect(sprite) {
 function readScanElement(buf, offset, acc) {
   if (!acc) { acc = []; }
 
-  var numBytes = buf[offset];  // first byte = number of bytes of data in element
-
-  var flag = buf[offset] & parseInt('10000000', 2);
+  var flag = buf[offset] & parseInt('10000000', 2);  // flag indicating if this is the last el or not
+  var numBytes = buf[offset] & parseInt('01111111', 2);  // number of bytes (pixels) to read
 
   // scan element begins at this offset from left edge of the graphic
   var offsetValue = buf[offset+1];
@@ -34,7 +33,7 @@ function readScanElement(buf, offset, acc) {
   });
 
   var el = {
-    xoffset: buf[offset+1],
+    xoffset: offsetValue,
     pixels: pixels
   };
 
@@ -43,7 +42,7 @@ function readScanElement(buf, offset, acc) {
     return acc.concat(el);
   } else {
     // there will be a scan element after on this row
-    return readScanElement(buf, offset+2+numBytes, acc.concat(el));
+    return readScanElement(buf, offset + 2 + numBytes, acc.concat(el));
   }
 }
 
@@ -52,7 +51,7 @@ function loadCompacted(sprite) {
 
   // create 2D array of pixels
   // (the most efficient data structure ever, obviously)
-  var spriteMap = _.range(sprite.height).map(function() {
+  var pixelMap = _.range(sprite.height).map(function() {
     return _.range(sprite.width).map(function() { return null; });
   });
 
@@ -65,10 +64,20 @@ function loadCompacted(sprite) {
     return sprite.startAddress + pointer;
   });
 
-  var elList = rowAddresses.map(function(rowAddress) {
+  var rows = rowAddresses.map(function(rowAddress) {
     return readScanElement(spriteBuf, rowAddress);
   });
-  console.log(elList);
+
+  // transform the crazy list of elements into the pixelMap
+  rows.forEach(function(row, y) {
+    row.forEach(function(el) {
+      el.pixels.forEach(function(pixel, i) {
+        pixelMap[y][el.xoffset + i] = pixel;
+      });
+    });
+  });
+
+  return pixelMap;
 }
 
 function loadPalette(sprite) {
