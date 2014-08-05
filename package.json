@@ -1,6 +1,6 @@
 {
-  "name": "nw-demo",
-  "main": "index.html",
+  "name": "goliath",
+  "main": "server.js",
   "dependencies": {
     "lodash": "~2.4.1",
     "canvas": "~1.1.6",
