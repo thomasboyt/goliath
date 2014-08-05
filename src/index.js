@@ -23,10 +23,8 @@ function readScanElement(buf, offset, acc) {
   if (!acc) { acc = []; }
 
   var numBytes = buf[offset];  // first byte = number of bytes of data in element
-  console.log(numBytes);
 
   var flag = buf[offset] & parseInt('10000000', 2);
-  console.log(flag);
 
   // scan element begins at this offset from left edge of the graphic
   var offsetValue = buf[offset+1];
@@ -45,7 +43,7 @@ function readScanElement(buf, offset, acc) {
     return acc.concat(el);
   } else {
     // there will be a scan element after on this row
-    return readScanElement(buf, offset+numBytes, acc.concat(el));
+    return readScanElement(buf, offset+2+numBytes, acc.concat(el));
   }
 }
 
