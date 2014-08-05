@@ -24,6 +24,10 @@ SpriteLoader.prototype._loadPalette = function(sprite) {
     colors: [],  // colors in rgb format
     startingIndex: sprite.xoffset
   };
+
+  // TODO: clean up
+  palette.colors = _.range(palette.startingIndex).map(function() { return undefined; });
+
   var numEntries = sprite.width;
 
   var startOffset = sprite.startAddress;
