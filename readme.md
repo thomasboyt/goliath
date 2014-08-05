@@ -1,6 +1,7 @@
 ### Running
 
 * Copy `CSG1.dat.` and `csg1i.dat` from your RCT install's data folder into a `data/` folder in this repo
+* `brew install cairo --without-x11`
 * `npm install`
 * `npm start`
 * Navigate to e.g. [http://localhost:3000/sprites/3000](http://localhost:3000/sprites/3000)
