@@ -14,6 +14,7 @@ In general, I don't think I've set up palettes correctly! There's like a weird o
 ### Points of interest
 
 * Around 3000: steel coaster car!
+* [Peeps](http://localhost:3000/sprites/50025?palette_id=0)
 * *...*
 
 ### Resources
