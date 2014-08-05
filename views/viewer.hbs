@@ -2,6 +2,18 @@
   <head>
   </head>
   <body>
-    <img src="{{{dataURL}}}" />
+    <img src="{{{dataURL}}}" /><br/>
+
+    <a href="/sprites/{{last}}">Last</a> - {{id}} - <a href="/sprites/{{next}}">Next</a>
+    <br/><br/>
+
+    <table>
+      <tr>
+        <td>Index</td>
+        <td>{{id}}</td>
+      <tr>
+        <td>Address</td>
+        <td>{{meta.decAddress}} / 0x{{meta.hexAddress}}</td>
+      </tr>
   </body>
 </html>

@@ -22,14 +22,6 @@ function readChunk(data, offset) {
   return sprite;
 }
 
-function hexDict(o) {
-  var op = {};
-  for (var k in o) {
-    op[k] = '0x' + o[k].toString(16);
-  }
-  return op;
-}
-
 module.exports = function(data) {
   var sprites = [];
 
